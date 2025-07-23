@@ -20,7 +20,7 @@ const categories = [
 const CategoryGrid = () => {
   return (
     <div className="container my-5">
-      <h4 className="text-center fw-bold text-danger  mb-5 " style={{ fontSize: '1.5rem' }}>
+      <h4 className="text-center fw-bold text-black mb-5 p-1 " style={{ fontSize: '1.5rem' }}>
         Our Categories
       </h4>
 
@@ -36,7 +36,7 @@ const CategoryGrid = () => {
               />
               <div className="card-body">
                 <h6 className="fw-semibold">{cat.name}</h6>
-                <Link to={cat.link} className="btn btn-outline-danger btn-sm mt-2">
+                <Link to={cat.link} className="btn bg-danger text-light btn-sm mt-2">
                   Shop Now
                 </Link>
               </div>

@@ -4,7 +4,7 @@ import logo from '../assets/logo.png';
 
 const Header = () => {
   return (
-    <nav className="navbar navbar-expand-lg bg-white shadow-sm py-2 sticky-top">
+    <nav className="navbar navbar-expand-lg bg-black shadow-sm py-2 sticky-top">
       <div className="container d-flex align-items-center justify-content-between">
 
         {/* Logo */}
@@ -44,32 +44,32 @@ const Header = () => {
             {/* Nav Links */}
             <ul className="navbar-nav flex-row gap-5 mr-5">
               <li className="nav-item">
-                <Link className="nav-link text-danger fw-semibold" to="/">Home</Link>
+                <Link className="nav-link text-light fw-semibold" to="/">Home</Link>
               </li>
               <li className="nav-item">
-                <Link className="nav-link text-danger fw-semibold" to="/shop">Shop</Link>
+                <Link className="nav-link text-light fw-semibold" to="/shop">Shop</Link>
               </li>
               <li className="nav-item">
-                <Link className="nav-link text-danger fw-semibold" to="/about">About</Link>
+                <Link className="nav-link text-light fw-semibold" to="/about">About</Link>
               </li>
               <li className="nav-item">
-                <Link className="nav-link text-danger fw-semibold" to="/contact">Contact</Link>
+                <Link className="nav-link text-light fw-semibold" to="/contact">Contact</Link>
               </li>
             </ul>
 
             {/* Icons & Login */}
             <div className="d-flex align-items-center gap-4">
-              <Link to="/cart" className="text-danger fs-5">
+              <Link to="/cart" className="text-light fs-5">
                 <i className="bi bi-cart-fill"></i>
               </Link>
 
-              <Link to="/profile" className="text-danger fs-5">
+              <Link to="/profile" className="text-light fs-5">
                 <i className="bi bi-person-circle"></i>
               </Link>
 
               <div className="dropdown">
                 <button
-                  className="btn btn-outline-danger btn-sm dropdown-toggle"
+                  className="btn btn-outline-light btn-sm dropdown-toggle"
                   type="button"
                   id="loginDropdown"
                   data-bs-toggle="dropdown"

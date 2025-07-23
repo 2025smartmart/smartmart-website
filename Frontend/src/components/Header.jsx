@@ -4,15 +4,30 @@ import logo from '../assets/logo.png';
 
 const Header = () => {
   return (
-    <nav className="navbar navbar-expand-lg ms-4 me-4 bg-white shadow-sm py-2" style={{ padding: '0 30px' }}>
-      <div className="container-fluid">
+    <nav className="navbar navbar-expand-lg bg-white shadow-sm py-2 sticky-top">
+      <div className="container d-flex align-items-center justify-content-between">
 
         {/* Logo */}
-        <Link className="navbar-brand me-4" to="/">
-          <img src={logo} alt="Smart Mart" height="40" />
+        <Link className="navbar-brand me-5" to="/">
+          <img src={logo} alt="Smart Mart" height="45" />
         </Link>
 
-        {/* Mobile Toggler */}
+        {/* Search Box */}
+        <form className="d-none d-md-block ml-5 " style={{ maxWidth: '280px', width: '100%' }}>
+          <div className="input-group">
+            <input
+              type="text"
+              className="form-control border-danger"
+              placeholder="Search..."
+              style={{ borderRadius: '30px 0 0 30px' }}
+            />
+            <button className="btn btn-danger" type="submit" style={{ borderRadius: '0 30px 30px 0' }}>
+              <i className="bi bi-search"></i>
+            </button>
+          </div>
+        </form>
+
+        {/* Navbar Toggler */}
         <button
           className="navbar-toggler"
           type="button"
@@ -22,60 +37,39 @@ const Header = () => {
           <span className="navbar-toggler-icon"></span>
         </button>
 
-        {/* Navbar content */}
+        {/* Navbar Content */}
         <div className="collapse navbar-collapse" id="navbarContent">
-          <div className="d-flex flex-grow-1 align-items-center justify-content-between gap-3 flex-wrap">
+          <div className="d-flex flex-wrap align-items-center justify-content-end w-100 gap-4 mt-3 mt-lg-0">
 
-            {/* Navigation Links */}
-            <ul className="navbar-nav flex-row gap-5">
+            {/* Nav Links */}
+            <ul className="navbar-nav flex-row gap-5 mr-5">
               <li className="nav-item">
-                <Link className="nav-link ms-5 text-danger" to="/">Home</Link>
-              </li>
-
-              <li className="nav-item">
-                <Link className="nav-link text-danger" to="/shop">Shop</Link>
-              </li>
-
-            
-              <li className="nav-item">
-                <Link className="nav-link text-danger" to="/about">About</Link>
+                <Link className="nav-link text-danger fw-semibold" to="/">Home</Link>
               </li>
               <li className="nav-item">
-                <Link className="nav-link text-danger" to="/contact">Contact</Link>
+                <Link className="nav-link text-danger fw-semibold" to="/shop">Shop</Link>
+              </li>
+              <li className="nav-item">
+                <Link className="nav-link text-danger fw-semibold" to="/about">About</Link>
+              </li>
+              <li className="nav-item">
+                <Link className="nav-link text-danger fw-semibold" to="/contact">Contact</Link>
               </li>
             </ul>
 
-            {/* Search Box */}
-            <form className="d-flex" style={{ maxWidth: '250px', width: '100%' }}>
-              <div className="input-group rounded shadow-sm">
-                <input
-                  type="search"
-                  className="form-control border-danger"
-                  placeholder="Search..."
-                  style={{ borderRadius: '30px 0 0 30px' }}
-                />
-                <button className="btn btn-danger" type="submit" style={{ borderRadius: '0 30px 30px 0' }}>
-                  <i className="bi bi-search"></i>
-                </button>
-              </div>
-            </form>
-
-            {/* Cart */}
-            <div className="d-flex align-items-center gap-3">
-              <Link to="/cart" className="text-danger">
-                <i className="bi bi-cart-fill fs-5"></i>
-                
+            {/* Icons & Login */}
+            <div className="d-flex align-items-center gap-4">
+              <Link to="/cart" className="text-danger fs-5">
+                <i className="bi bi-cart-fill"></i>
               </Link>
 
-               {/* Profile Icon (Bootstrap Icon) */}
-  <a href="/profile" className="mx-2">
-    <i className="bi bi-person-circle text-danger fs-5"></i> 
-  </a>
-  
+              <Link to="/profile" className="text-danger fs-5">
+                <i className="bi bi-person-circle"></i>
+              </Link>
 
               <div className="dropdown">
                 <button
-                  className="btn btn-sm btn-outline-danger dropdown-toggle"
+                  className="btn btn-outline-danger btn-sm dropdown-toggle"
                   type="button"
                   id="loginDropdown"
                   data-bs-toggle="dropdown"
@@ -84,7 +78,7 @@ const Header = () => {
                   Login
                 </button>
                 <ul className="dropdown-menu dropdown-menu-end" aria-labelledby="loginDropdown">
-                  <li className="dropdown-item d-flex justify-content-between small">
+                  <li className="dropdown-item small d-flex justify-content-between">
                     <span>New customer?</span>
                     <Link to="/signup" className="text-primary ms-2">Sign Up</Link>
                   </li>
@@ -104,6 +98,10 @@ const Header = () => {
 };
 
 export default Header;
+
+
+
+
 
 
 

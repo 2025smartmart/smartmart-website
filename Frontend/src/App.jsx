@@ -9,7 +9,6 @@ import Header from './components/Header'
 import Login from "./pages/Login"
 import Signup from "./pages/Signup"
 import ForgotPassword from "./pages/Forgotpassword"
-import Carouselslider from "./components/Carouselslider"
 import Footer from "./components/Footer"
 
 const AppContent = () => {
@@ -19,8 +18,7 @@ const AppContent = () => {
   return (
     <>
       <Header />
-      {isHome && 
-      <Carouselslider />}
+      {isHome }
 
       <Routes>
         <Route path="/" element={<Home />} />
@@ -31,6 +29,7 @@ const AppContent = () => {
         <Route path="/login" element={<Login />} />
         <Route path="/signup" element={<Signup />} />
         <Route path="/forgot-password" element={<ForgotPassword />} />
+        
        
         
       </Routes>

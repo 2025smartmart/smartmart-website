@@ -1,29 +1,50 @@
-import { BrowserRouter, Routes, Route } from "react-router-dom"
-import Home from './components/Home'
-import Shop from './components/Shop'
-import About from './components/About'
-import Contact from './components/Contact'
-import Services from './components/Services'
-import Header from './components/Header'
+import { BrowserRouter, Routes, Route, useLocation } from "react-router-dom"
+import { useState } from "react"
 import 'bootstrap/dist/css/bootstrap.min.css';
+import Home from "./pages/Home"
+import Shop from "./pages/Shop"
+import About from "./pages/About"
+import Contact from "./pages/Contact"
+import Header from './components/Header'
+import Login from "./pages/Login"
+import Signup from "./pages/Signup"
+import ForgotPassword from "./pages/Forgotpassword"
 import Carouselslider from "./components/Carouselslider"
+import Footer from "./components/Footer"
+
+const AppContent = () => {
+  const location = useLocation();
+  const isHome = location.pathname === "/";
+
+  return (
+    <>
+      <Header />
+      {isHome && 
+      <Carouselslider />}
+
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="/shop" element={<Shop />} />
+      
+        <Route path="/about" element={<About />} />
+        <Route path="/contact" element={<Contact />} />
+        <Route path="/login" element={<Login />} />
+        <Route path="/signup" element={<Signup />} />
+        <Route path="/forgot-password" element={<ForgotPassword />} />
+       
+        
+      </Routes>
+    </>
+  );
+};
 
 const App = () => {
-  return <>
-  <BrowserRouter>
-    <Header/>
-    <Routes>
-      <Route path="/" element={<Home />}></Route>
-      <Route path="/shop" element={<Shop />}></Route>
-      <Route path="/services" element={<Services />}></Route>
-      <Route path="/about" element={<About />}></Route>
-      <Route path="/contact" element={<Contact />}></Route>
+  return (
+    <BrowserRouter>
+      <AppContent />
+      <Footer/>
+    </BrowserRouter>
+  );
+};
 
-    </Routes>
-  </BrowserRouter>
-   <Carouselslider/>
-   
-  </>
-}
-
-export default App
+export default App;

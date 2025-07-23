@@ -32,28 +32,11 @@ const Header = () => {
                 <Link className="nav-link ms-5 text-danger" to="/">Home</Link>
               </li>
 
-              {/* Shop Dropdown */}
-              <li className="nav-item dropdown">
-                <Link
-                  className="nav-link dropdown-toggle text-danger"
-                  to="#"
-                  role="button"
-                  data-bs-toggle="dropdown"
-                  aria-expanded="false"
-                >
-                  Shop
-                </Link>
-                <ul className="dropdown-menu">
-                  <li><Link className="dropdown-item" to="/category/mobiles">Mobiles</Link></li>
-                  <li><Link className="dropdown-item" to="/category/laptops">Laptops</Link></li>
-                  <li><Link className="dropdown-item" to="/category/audio">Audio</Link></li>
-                  <li><Link className="dropdown-item" to="/category/wearables">Wearables</Link></li>
-                </ul>
+              <li className="nav-item">
+                <Link className="nav-link text-danger" to="/shop">Shop</Link>
               </li>
 
-              <li className="nav-item">
-                <Link className="nav-link text-danger" to="/services">Services</Link>
-              </li>
+            
               <li className="nav-item">
                 <Link className="nav-link text-danger" to="/about">About</Link>
               </li>
@@ -77,11 +60,18 @@ const Header = () => {
               </div>
             </form>
 
-            {/* Cart + Login */}
-            <div className="d-flex align-items-center gap-5">
+            {/* Cart */}
+            <div className="d-flex align-items-center gap-3">
               <Link to="/cart" className="text-danger">
                 <i className="bi bi-cart-fill fs-5"></i>
+                
               </Link>
+
+               {/* Profile Icon (Bootstrap Icon) */}
+  <a href="/profile" className="mx-2">
+    <i className="bi bi-person-circle text-danger fs-5"></i> 
+  </a>
+  
 
               <div className="dropdown">
                 <button
@@ -100,7 +90,6 @@ const Header = () => {
                   </li>
                   <li><hr className="dropdown-divider" /></li>
                   <li><Link to="/login" className="dropdown-item">Login</Link></li>
-                  <li><Link to="/profile" className="dropdown-item">My Profile</Link></li>
                   <li><Link to="/orders" className="dropdown-item">Orders</Link></li>
                 </ul>
               </div>

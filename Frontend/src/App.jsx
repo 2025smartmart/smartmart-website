@@ -10,7 +10,6 @@ import Login from "./pages/Login"
 import Signup from "./pages/Signup"
 import ForgotPassword from "./pages/Forgotpassword"
 import Footer from "./components/Footer"
-import Admin from "./pages/Admin";
 import ProductUploadForm from "./components/ProductUploadForm";
 
 const AppContent = () => {
@@ -33,7 +32,7 @@ const AppContent = () => {
         <Route path="/login" element={<Login />} />
         <Route path="/signup" element={<Signup />} />
         <Route path="/forgot-password" element={<ForgotPassword />} />
-        <Route path="/admin/upload" element={<Admin />} />
+       
        
         
         

@@ -9,7 +9,7 @@ const Header = () => {
 
         {/* Logo */}
         <Link className="navbar-brand me-5" to="/">
-          <img src={logo} alt="Smart Mart" height="45" />
+          <img src={logo} alt="Smart Mart" height="40" />
         </Link>
 
         {/* Search Box */}
@@ -55,6 +55,11 @@ const Header = () => {
               <li className="nav-item">
                 <Link className="nav-link text-light fw-semibold" to="/contact">Contact</Link>
               </li>
+               <li className="nav-item">
+    <Link className="nav-link text-light fw-semibold" to="/admin/upload">Admin</Link>
+  </li>
+              
+             
             </ul>
 
             {/* Icons & Login */}

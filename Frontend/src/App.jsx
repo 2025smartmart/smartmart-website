@@ -10,6 +10,8 @@ import Login from "./pages/Login"
 import Signup from "./pages/Signup"
 import ForgotPassword from "./pages/Forgotpassword"
 import Footer from "./components/Footer"
+import Admin from "./pages/Admin";
+import ProductUploadForm from "./components/ProductUploadForm";
 
 const AppContent = () => {
   const location = useLocation();
@@ -20,6 +22,8 @@ const AppContent = () => {
       <Header />
       {isHome }
 
+      
+
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/shop" element={<Shop />} />
@@ -29,10 +33,12 @@ const AppContent = () => {
         <Route path="/login" element={<Login />} />
         <Route path="/signup" element={<Signup />} />
         <Route path="/forgot-password" element={<ForgotPassword />} />
-        
+        <Route path="/admin/upload" element={<Admin />} />
        
         
+        
       </Routes>
+     
     </>
   );
 };

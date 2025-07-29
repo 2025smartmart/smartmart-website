@@ -20,6 +20,8 @@ app.use('/api', authRoutes);
 
 app.use('/api/products/uploads', express.static('uploads'));
 
+app.use('/api/products', productRoutes);
+
 
 app.listen(5000, () => {
   console.log("Server running on http://localhost:5000")

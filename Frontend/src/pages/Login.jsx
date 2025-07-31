@@ -11,7 +11,7 @@ const Login = () => {
 const handleLogin = async (e) => {
   e.preventDefault();
   try {
-    const { data } = await axios.post("http://localhost:5000/api/login", { email, password });
+    const { data } = await axios.post("http://localhost:5600/api/signin", { email, password });
     if (data.success) {
       localStorage.setItem("user", JSON.stringify(data.user));
       navigate("/");

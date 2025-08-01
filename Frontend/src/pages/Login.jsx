@@ -1,29 +1,45 @@
 import axios from 'axios';
 import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
+import { useAuth } from '../context/AuthContext';
+import { toast } from 'react-toastify';
 
 const Login = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [loading, setLoading] = useState(false);
+
+  const { login } = useAuth(); // Optional: saves user & token globally
   const navigate = useNavigate();
 
-  // Only keep this inside handleLogin
-const handleLogin = async (e) => {
-  e.preventDefault();
-  try {
-    const { data } = await axios.post("http://localhost:5000/api/login", { email, password });
-    if (data.success) {
-      localStorage.setItem("user", JSON.stringify(data.user));
-      navigate("/");
-    } else {
-      alert(data.message);
-    }
-  } catch (err) {
-    console.log(err);
-    alert("Login failed");
-  }
-};
+  const handleLogin = async (e) => {
+    e.preventDefault();
+    setLoading(true);
 
+    try {
+      const { data } = await axios.post(
+        "http://localhost:5000/api/login",
+        { email, password },
+        { withCredentials: true }
+      );
+
+      if (data.success) {
+        const user = data.data.user;
+        const token = data.data.token;
+
+        login({ ...user, token }); // Save user and token in context (if used)
+        toast.success('Login successful');
+        navigate('/');
+      } else {
+        toast.error(data.message || 'Login failed');
+      }
+    } catch (err) {
+      console.error(err);
+      toast.error("Login failed. Check your credentials.");
+    } finally {
+      setLoading(false);
+    }
+  };
 
   return (
     <div className="d-flex justify-content-center align-items-center vh-100 bg-light">
@@ -64,7 +80,16 @@ const handleLogin = async (e) => {
           </div>
 
           <div className="d-grid mb-3">
-            <button type="submit" className="btn btn-danger">Login</button>
+            <button type="submit" className="btn btn-danger" disabled={loading}>
+              {loading ? (
+                <>
+                  <span className="spinner-border spinner-border-sm me-2" role="status" />
+                  Logging in...
+                </>
+              ) : (
+                'Login'
+              )}
+            </button>
           </div>
 
           <div className="text-center">
@@ -79,6 +104,9 @@ const handleLogin = async (e) => {
 };
 
 export default Login;
+
+
+
 
 
 

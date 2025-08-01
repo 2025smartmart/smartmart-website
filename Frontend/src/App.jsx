@@ -1,6 +1,9 @@
 import { BrowserRouter, Routes, Route, useLocation } from "react-router-dom"
 import { useState } from "react"
 import 'bootstrap/dist/css/bootstrap.min.css';
+import 'react-toastify/dist/ReactToastify.css';
+import { ToastContainer } from 'react-toastify'; 
+
 import Home from "./pages/Home"
 import ShopPage from "./pages/ShopPage";
 import About from "./pages/About"
@@ -47,6 +50,7 @@ const App = () => {
     <BrowserRouter>
       <AppContent />
       <Footer/>
+       <ToastContainer position="top-right" autoClose={3000} />
     </BrowserRouter>
   );
 };

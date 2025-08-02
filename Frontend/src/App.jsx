@@ -29,19 +29,20 @@ import AdminDashboard from "./pages/AdminDashboard";
 
 const AppContent = () => {
   const location = useLocation();
-  const isHome = location.pathname === "/";
+  const path = location.pathname;
+
+  // List of paths where Footer should be visible
+  const showFooterPaths = ['/', '/shop'];
+
+  const shouldShowFooter = showFooterPaths.includes(path);
 
   return (
     <>
       <Header />
-      {isHome }
-
-      
 
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/shop" element={<ShopPage />} />
-      
         <Route path="/about" element={<About />} />
         <Route path="/contact" element={<Contact />} />
         <Route path="/login" element={<Login />} />
@@ -50,26 +51,26 @@ const AppContent = () => {
 
         <Route path="/profile" element={<UserRoute><Profile /></UserRoute>} />
         <Route path="/orders" element={<UserRoute><Orders /></UserRoute>} />
-        
+
         <Route path="/admin" element={<AdminRoute><AdminDashboard /></AdminRoute>} />
         <Route path="dashboard" element={<h2>Welcome Admin</h2>} />
-       
-          <Route path="products" element={<AdminProductList />} />
+        <Route path="products" element={<AdminProductList />} />
         <Route path="add-product" element={<AddProduct />} />
         <Route path="manage-products" element={<ManageProducts />} />
         <Route path="add-category" element={<AddCategory />} />
-        
       </Routes>
-     
+
+      {/* Conditionally render Footer */}
+      {shouldShowFooter && <Footer />}
     </>
   );
 };
+
 
 const App = () => {
   return (
     <BrowserRouter>
       <AppContent />
-      <Footer/>
        <ToastContainer position="top-right" autoClose={3000} />
     </BrowserRouter>
   );

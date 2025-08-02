@@ -6,6 +6,8 @@ const {
   addProduct,
 } = require('../controllers/product/productController');
 
+const upload = require('../middleware/upload')
+
 // Get all products
 router.get('/', getAllProducts);
 

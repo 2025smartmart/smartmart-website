@@ -1,5 +1,4 @@
-// src/context/AuthContext.jsx
-import { createContext, useState, useContext, useEffect } from 'react';
+import { createContext, useState, useContext } from 'react';
 
 export const AuthContext = createContext();
 
@@ -10,12 +9,12 @@ export const AuthProvider = ({ children }) => {
   });
 
   const login = (userData) => {
-    setUser(userData);
+    setUser(userData); // ✅ triggers re-render
     localStorage.setItem('user', JSON.stringify(userData));
   };
 
   const logout = () => {
-    setUser(null);
+    setUser(null); // ✅ clears UI
     localStorage.removeItem('user');
   };
 
@@ -26,5 +25,5 @@ export const AuthProvider = ({ children }) => {
   );
 };
 
-
 export const useAuth = () => useContext(AuthContext);
+

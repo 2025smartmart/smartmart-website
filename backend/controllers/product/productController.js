@@ -24,10 +24,11 @@ const getFeaturedProducts = async (req, res) => {
 // Add a new product
 const addProduct = async (req, res) => {
   try {
-    const { name, price, image, isFeatured } = req.body;
+    const { name, description, price, image, isFeatured } = req.body;
 
     const newProduct = new Product({
       name,
+      description,
       price,
       image,
       isFeatured,

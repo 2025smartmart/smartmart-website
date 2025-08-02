@@ -9,37 +9,49 @@ const Login = () => {
   const [password, setPassword] = useState('');
   const [loading, setLoading] = useState(false);
 
-  const { login } = useAuth(); // Optional: saves user & token globally
+  const { login } = useAuth();
   const navigate = useNavigate();
 
   const handleLogin = async (e) => {
-    e.preventDefault();
-    setLoading(true);
+  e.preventDefault();
+  setLoading(true);
 
-    try {
-      const { data } = await axios.post(
-        "http://localhost:5000/api/login",
-        { email, password },
-        { withCredentials: true }
-      );
+  try {
+    const { data } = await axios.post(
+      "http://localhost:5000/api/login",
+      { email, password },
+      { withCredentials: true }
+    );
 
-      if (data.success) {
-        const user = data.data.user;
-        const token = data.data.token;
+    if (data.success) {
+      const user = data.data.user;
+      const token = data.data.token;
 
-        login({ ...user, token }); // Save user and token in context (if used)
-        toast.success('Login successful');
-        navigate('/');
+      // ✅ Fix: Save token to localStorage
+      localStorage.setItem('token', token);
+
+      // Save to context (optional)
+      login({ ...user, token });
+
+      toast.success('Login successful');
+
+      // Redirect based on role
+      if (user && user.role === 'admin') {
+        navigate('/admin', { replace: true });
       } else {
-        toast.error(data.message || 'Login failed');
+        navigate('/profile', { replace: true });
       }
-    } catch (err) {
-      console.error(err);
-      toast.error("Login failed. Check your credentials.");
-    } finally {
-      setLoading(false);
+    } else {
+      toast.error(data.message || 'Login failed');
     }
-  };
+  } catch (err) {
+    console.error(err);
+    toast.error("Login failed. Check your credentials.");
+  } finally {
+    setLoading(false);
+  }
+};
+
 
   return (
     <div className="d-flex justify-content-center align-items-center vh-100 bg-light">
@@ -104,6 +116,8 @@ const Login = () => {
 };
 
 export default Login;
+
+
 
 
 

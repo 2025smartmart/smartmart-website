@@ -15,6 +15,18 @@ import ForgotPassword from "./pages/Forgotpassword"
 import Footer from "./components/Footer"
 import ProductUploadForm from "./components/ProductUploadForm";
 
+import AdminRoute from "./routes/AdminRoute";
+import AddProduct from "./pages/AddProduct";
+import ManageProducts from "./pages/ManageProducts";
+import AddCategory from "./pages/AddCategory";
+
+import UserRoute from "./routes/UserRoute";
+import Profile from "./pages/Profile";
+import Orders from "./pages/Orders";
+import AdminProductList from "./pages/admin/AdminProductList";
+import AdminDashboard from "./pages/AdminDashboard";
+
+
 const AppContent = () => {
   const location = useLocation();
   const isHome = location.pathname === "/";
@@ -35,9 +47,17 @@ const AppContent = () => {
         <Route path="/login" element={<Login />} />
         <Route path="/signup" element={<Signup />} />
         <Route path="/forgot-password" element={<ForgotPassword />} />
-       
-       
+
+        <Route path="/profile" element={<UserRoute><Profile /></UserRoute>} />
+        <Route path="/orders" element={<UserRoute><Orders /></UserRoute>} />
         
+        <Route path="/admin" element={<AdminRoute><AdminDashboard /></AdminRoute>} />
+        <Route path="dashboard" element={<h2>Welcome Admin</h2>} />
+       
+          <Route path="products" element={<AdminProductList />} />
+        <Route path="add-product" element={<AddProduct />} />
+        <Route path="manage-products" element={<ManageProducts />} />
+        <Route path="add-category" element={<AddCategory />} />
         
       </Routes>
      

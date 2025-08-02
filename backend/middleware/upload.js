@@ -1,29 +1,36 @@
-import multer from 'multer';
-import path from 'path';
+// /middleware/upload.js
+const multer = require('multer');
+const path = require('path');
 
-// Set storage engine
+// Storage config
 const storage = multer.diskStorage({
   destination: (req, file, cb) => {
-    cb(null, 'uploads/'); // save in uploads folder
+    cb(null, 'uploads/'); // ✅ Make sure 'uploads' folder exists in root
   },
   filename: (req, file, cb) => {
-    cb(null, Date.now() + path.extname(file.originalname));
+    const ext = path.extname(file.originalname);
+    const baseName = path.basename(file.originalname, ext).replace(/\s+/g, '-');
+    const uniqueName = `${Date.now()}-${baseName}${ext}`;
+    cb(null, uniqueName);
   },
 });
 
-// File filter (accept images only)
-const fileFilter = (req, file, cb) => {
-  const fileTypes = /jpeg|jpg|png|webp/;
-  const extname = fileTypes.test(path.extname(file.originalname).toLowerCase());
-  const mimetype = fileTypes.test(file.mimetype);
+// Upload middleware
+const upload = multer({
+  storage,
+  limits: { fileSize: 6 * 1024 * 1024 }, // 6 MB
+  fileFilter: (req, file, cb) => {
+    const fileTypes = /jpeg|jpg|png|webp/;
+    const extName = fileTypes.test(path.extname(file.originalname).toLowerCase());
+    const mimeType = fileTypes.test(file.mimetype);
 
-  if (mimetype && extname) {
-    cb(null, true);
-  } else {
-    cb('Only image files allowed!');
-  }
-};
+    if (extName && mimeType) {
+      cb(null, true);
+    } else {
+      cb(new Error('Only image files (jpg, jpeg, png, webp) are allowed!'));
+    }
+  },
+});
 
-const upload = multer({ storage, fileFilter });
+module.exports = upload;
 
-export default upload;

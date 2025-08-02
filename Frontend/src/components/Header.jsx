@@ -1,12 +1,12 @@
-import React, { useContext } from 'react';
+import React from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import { AuthContext } from '../context/AuthContext';
+import { useAuth } from '../context/AuthContext';
 import logo from '../assets/logo.png';
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
 const Header = () => {
-  const { user, logout } = useContext(AuthContext);
+  const { user, logout } = useAuth();
   const navigate = useNavigate();
 
   const handleLogout = () => {
@@ -25,7 +25,7 @@ const Header = () => {
         </Link>
 
         {/* Search Box */}
-        <form className="d-none d-md-block ml-5" style={{ maxWidth: '280px', width: '100%' }}>
+        <form className="d-none d-md-block" style={{ maxWidth: '280px', width: '100%' }}>
           <div className="input-group">
             <input
               type="text"
@@ -39,7 +39,7 @@ const Header = () => {
           </div>
         </form>
 
-        {/* Navbar Toggler */}
+        {/* Navbar toggler (for mobile) */}
         <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarContent">
           <span className="navbar-toggler-icon"></span>
         </button>
@@ -54,47 +54,59 @@ const Header = () => {
               <li className="nav-item"><Link className="nav-link text-light fw-semibold" to="/shop">Shop</Link></li>
               <li className="nav-item"><Link className="nav-link text-light fw-semibold" to="/about">About</Link></li>
               <li className="nav-item"><Link className="nav-link text-light fw-semibold" to="/contact">Contact</Link></li>
+
+          {user && user.role === 'admin' && (
+          <li className="nav-item">
+          <Link className="nav-link text-light fw-semibold" to="/admin">
+            Admin Dashboard
+          </Link>
+          </li>
+          )}
+
             </ul>
 
-              {!user ? (
-  // BEFORE LOGIN — Show Profile Icon and Login Dropdown
-  <>
-    <i className="bi bi-person-circle fs-5 text-light" data-bs-toggle="tooltip" title="Account"></i>
-    <div className="dropdown">
-      <button
-        className="btn btn-outline-light btn-sm dropdown-toggle"
-        type="button"
-        id="loginDropdown"
-        data-bs-toggle="dropdown"
-        aria-expanded="false"
-      >
-        Login
-      </button>
-      <ul className="dropdown-menu dropdown-menu-end" aria-labelledby="loginDropdown">
-        <li className="dropdown-item small d-flex justify-content-between">
-          <span>New user?</span>
-          <Link to="/signup" className="text-primary ms-2">Sign Up</Link>
-        </li>
-        <li><hr className="dropdown-divider" /></li>
-        <li><Link to="/login" className="dropdown-item">Login</Link></li>
-        <li><Link to="/orders" className="dropdown-item">Orders</Link></li>
-      </ul>
-    </div>
-  </>
-) : (
-  // AFTER LOGIN — Show Name and Logout Button
-  <>
-    <div className="d-flex align-items-center text-light gap-2">
-      <i className="bi bi-person-circle fs-5" data-bs-toggle="tooltip" title="Logged in as"></i>
-      <span>{user.name?.split(' ')[0]}</span>
-    </div>
-    <button onClick={handleLogout} className="btn btn-outline-light btn-sm" data-bs-toggle="tooltip" title="Logout">
-      <i className="bi bi-box-arrow-right"></i>
-    </button>
-  </>
-)}
+            {/* Auth Section */}
+            {!user ? (
+              // BEFORE LOGIN
+              <>
+                <i className="bi bi-person-circle fs-5 text-light" data-bs-toggle="tooltip" title="Account"></i>
+                <div className="dropdown">
+                  <button
+                    className="btn btn-outline-light btn-sm dropdown-toggle"
+                    type="button"
+                    id="loginDropdown"
+                    data-bs-toggle="dropdown"
+                    aria-expanded="false"
+                  >
+                    Login
+                  </button>
+                  <ul className="dropdown-menu dropdown-menu-end" aria-labelledby="loginDropdown">
+                    <li className="dropdown-item small d-flex justify-content-between">
+                      <span>New user?</span>
+                      <Link to="/signup" className="text-primary ms-2">Sign Up</Link>
+                    </li>
+                    <li><hr className="dropdown-divider" /></li>
+                    <li><Link to="/login" className="dropdown-item">Login</Link></li>
+                    <li><Link to="/orders" className="dropdown-item">Orders</Link></li>
+                  </ul>
+                </div>
+              </>
+            ) : (
+              // AFTER LOGIN
+              <>
+                
+                
+              <Link to={user.role === 'admin' ? '/admin' : '/profile'} className="d-flex align-items-center text-light gap-2">
+              <i className="bi bi-person-circle fs-5" />
+              <span>{user.name?.split(' ')[0]}</span>
+              </Link>
 
-       
+
+                <button onClick={handleLogout} className="btn btn-outline-light btn-sm" data-bs-toggle="tooltip" title="Logout">
+                  <i className="bi bi-box-arrow-right"></i>
+                </button>
+              </>
+            )}
 
           </div>
         </div>
@@ -104,12 +116,6 @@ const Header = () => {
 };
 
 export default Header;
-
-
-
-
-
-
 
 
 

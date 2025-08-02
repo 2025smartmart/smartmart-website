@@ -4,10 +4,10 @@ const productSchema = new mongoose.Schema({
   name: { type: String, required: true },
   price: { type: Number, required: true },
   description: String,
-  image: String,
+  image: { type: String, required: true },
   isFeatured: { type: Boolean, default: false },
   category: String,
-  stock: Number
+  
 });
 
 const Product = mongoose.model("Product", productSchema);

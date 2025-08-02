@@ -3,7 +3,8 @@ import React from 'react';
 const Contact = () => {
   return (
     <div className="container py-5">
-      <h2 className="text-center text-danger mb-5">Contact Us</h2>
+      <h2 className="text-center text-danger mb-5">CONTACT US</h2>
+      
 
       <div className="row justify-content-center">
         <div className="col-md-6">
@@ -25,11 +26,16 @@ const Contact = () => {
               </div>
 
               <div className="mb-3">
+                <label htmlFor="phone no" className="form-label">phone no</label>
+                <input type="text" className="form-control" id="phone no" placeholder="phone no" />
+              </div>
+
+              <div className="mb-3">
                 <label htmlFor="message" className="form-label">Message</label>
                 <textarea className="form-control" id="message" rows="4" placeholder="Write your message here..." required></textarea>
               </div>
 
-              <button type="submit" className="btn btn-danger w-100">Send Message</button>
+              <button type="send" className="btn btn-danger w-100">send</button>
             </form>
           </div>
         </div>

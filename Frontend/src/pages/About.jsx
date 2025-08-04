@@ -2,45 +2,27 @@ import React from 'react';
 
 const About = () => {
   return (
-    <div className="container py-4">
-      {/* Page Title */}
-      <h2 className="text-center text-danger mb-5">About Us</h2>
+    <div style={{ padding: '40px', maxWidth: '900px', margin: '0 auto', fontFamily: 'Arial, sans-serif' }}>
+      <h1 style={{ fontSize: '36px', color: '#0A2647', marginBottom: '20px' }}>About SMART MART</h1>
+      
+      <p style={{ fontSize: '18px', color: '#333', lineHeight: '1.8' }}>
+        <strong>Welcome to SMART MART </strong> – your go-to destination for the latest and best in tech!
+      </p>
 
-      {/* Welcome Section */}
-      <div className="text-center mb-5">
-        <h4 className="fw-bold text-dark">Welcome to Smart Mart</h4>
-        <p className="text-muted mx-auto" style={{ maxWidth: '700px' }}>
-          At Smart Mart, we’re committed to delivering high-quality products and exceptional service.
-          We bring the most trusted electronics, fashion, and accessories to your doorstep —
-          making shopping easier, affordable, and reliable.
-        </p>
-      </div>
+      <p style={{ fontSize: '18px', color: '#555', lineHeight: '1.8' }}>
+        We bring you top-quality electronics including <strong>mobiles</strong>, <strong>laptops</strong>, <strong>earbuds</strong>, <strong>headsets</strong>, <strong>smartwatches</strong>, and <strong>speakers</strong>.
+        Our goal is to make online gadget shopping <span style={{ color: '#0D9276' }}>simple</span>, <span style={{ color: '#0D9276' }}>secure</span>, and <span style={{ color: '#0D9276' }}>affordable</span>.
+      </p>
 
-      {/* Mission & Vision */}
-      <div className="row g-4">
-        <div className="col-md-6">
-          <div className="p-4 border rounded shadow-sm h-100 text-center">
-            <h5 className="text-danger fw-semibold mb-3">Our Mission</h5>
-            <p className="text-muted mb-0">
-              To revolutionize online shopping with best-in-class products, fast delivery,
-              and seamless support — all while keeping our customers at the heart of everything we do.
-            </p>
-          </div>
-        </div>
+      <p style={{ fontSize: '18px', color: '#666', lineHeight: '1.8' }}>
+        SMART MART was created by passionate tech lovers who wanted to offer something better. We care about product quality, customer trust, and fast delivery.
+      </p>
 
-        <div className="col-md-6">
-          <div className="p-4 border rounded shadow-sm h-100 text-center">
-            <h5 className="text-danger fw-semibold mb-3">Our Vision</h5>
-            <p className="text-muted mb-0">
-              To be the most trusted online marketplace for every household by delivering value,
-              innovation, and a satisfying experience in every interaction.
-            </p>
-          </div>
-        </div>
-      </div>
+      <p style={{ fontSize: '18px', color: '#444', lineHeight: '1.8' }}>
+        💬 Thank you for choosing us – we're always here to serve you better!
+      </p>
     </div>
   );
 };
 
 export default About;
-

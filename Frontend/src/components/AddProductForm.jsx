@@ -18,7 +18,7 @@ const AddProductForm = () => {
     const fetchCategories = async () => {
       try {
         const res = await axios.get('http://localhost:5000/api/products/categories');
-        setCategories(res.data.categories || []); // Assuming response like { categories: [...] }
+        setCategories(res.data); // Assuming response like { categories: [...] }
       } catch (err) {
         console.error('Error fetching categories:', err);
         setCategories([]);
@@ -110,7 +110,7 @@ const AddProductForm = () => {
         className="form-control mb-2"
         required
       >
-        <option value="">-- Select Category --</option>
+        <option value="">-- Select Category </option>
         {categories.map((cat) => (
           <option key={cat._id} value={cat._id}>
             {cat.name}

@@ -6,7 +6,8 @@ const {
   getAllProducts,
   getFeaturedProducts,
   addProduct,
-  addCategory
+  addCategory,
+  getAllCategories
 } = require('../controllers/product/productController');
 
 // Add product (with image upload)
@@ -14,6 +15,7 @@ router.post('/add-product', upload.single('image'), addProduct);
 
 // Add category
 router.post('/add-category', addCategory);
+router.get('/categories', getAllCategories);
 
 // Public routes
 router.get('/', getAllProducts);

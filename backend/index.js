@@ -21,6 +21,7 @@ const productRoutes = require('./routes/productRoutes');
 
 app.use("/api", router); 
 app.use("/api/products", productRoutes);
+app.use("/api/category", productRoutes)
 
 // MongoDB connection
 mongoose.connect(process.env.MONGO_URI, {

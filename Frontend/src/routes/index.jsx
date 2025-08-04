@@ -9,7 +9,8 @@ import Contact from '../components/Contact';
 import About from '../components/About';
 import Services from '../components/Services';
 import Cart from '../components/Cart';
-import Admin from '../pages/Admin';
+import Dashboard from '../pages/Dashboard';
+
 
 
 const router = createBrowserRouter([
@@ -43,9 +44,10 @@ const router = createBrowserRouter([
     path: "about",
     element: <About/>,
   },
-  {
-    path: "admin",
-    element: <Admin/>,
+ 
+   {
+    path: "dashboard",
+    element: <Dashboard/>,
   },
  
 ]);

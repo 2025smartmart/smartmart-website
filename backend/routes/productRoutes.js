@@ -1,21 +1,28 @@
 const express = require('express');
 const router = express.Router();
+const upload = require("../middleware/upload");
+
 const {
   getAllProducts,
   getFeaturedProducts,
   addProduct,
+  addCategory
 } = require('../controllers/product/productController');
 
-const upload = require('../middleware/upload')
+// Add product (with image upload)
+router.post('/add-product', upload.single('image'), addProduct);
 
-// Get all products
+// Add category
+router.post('/add-category', addCategory);
+
+// Public routes
 router.get('/', getAllProducts);
-
-// Get featured products
 router.get('/featured', getFeaturedProducts);
 
-// Add new product
-router.post('/add-product', addProduct);
-
 module.exports = router;
+
+
+
+
+
 

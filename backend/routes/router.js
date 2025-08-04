@@ -8,35 +8,32 @@ const userLogout = require("../controllers/user/userLogOut");
 const productController = require("../controllers/product/productController");
 
 
-// Auth Middleware
-const { protect, adminOnly } = require("../middleware/authMiddleware");
-
-// -------------------- USER ROUTES --------------------
 
 // Register new user
 router.post("/signup", userController.createUser);
 
-// Get all users (Admin only)
-router.get("/users", protect, adminOnly, userController.getAllUsers);
+
+router.get("/users", userController.getAllUsers);
 
 // Update user info (Admin only or self)
-router.put("/update-user/:id", protect, userController.updateUser);
+router.put("/update-user/:id", userController.updateUser);
 
 // Delete user (Admin only)
-router.delete("/delete-user/:id", protect, adminOnly, userController.deleteUser);
+router.delete("/delete-user/:id", userController.deleteUser);
 
 // Login & Logout
 router.post("/login", userSignIN);
 router.get("/logout", userLogout);
 
 // User profile (Protected route)
-router.get("/profile", protect, (req, res) => {
+router.get("/profile", (req, res) => {
   res.json({ message: "Welcome to protected route", user: req.user });
 });
 
 // -------------------- PRODUCT ROUTES --------------------
 
 // Public: Get featured products
+
 router.get("/products/featured", productController.getFeaturedProducts);
 
 // (You can add more product routes here if needed...)

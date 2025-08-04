@@ -57,8 +57,8 @@ const Header = () => {
 
           {user && user.role === 'admin' && (
           <li className="nav-item">
-          <Link className="nav-link text-light fw-semibold" to="/admin">
-            Admin Dashboard
+          <Link className="nav-link text-light fw-semibold" to="/dashboard">
+            Dashboard
           </Link>
           </li>
           )}
@@ -96,7 +96,7 @@ const Header = () => {
               <>
                 
                 
-              <Link to={user.role === 'admin' ? '/admin' : '/profile'} className="d-flex align-items-center text-light gap-2">
+              <Link to={user.role === 'admin' ? '/dashboard' : '/profile'} className="d-flex align-items-center text-light gap-2">
               <i className="bi bi-person-circle fs-5" />
               <span>{user.name?.split(' ')[0]}</span>
               </Link>

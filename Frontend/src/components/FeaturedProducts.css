@@ -3,6 +3,7 @@
   background: linear-gradient(135deg, #e8e8ef 0%, #f0f4ff 100%);
   position: relative;
   overflow: hidden;
+  
 }
 
 .section-intro {
@@ -57,7 +58,7 @@
   transform-style: preserve-3d;
   border-radius: 12px !important;
   overflow: hidden;
-  background: rgb(207, 23, 23);
+  background: rgb(255, 255, 255);
   box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
   height: 100%;
 }
@@ -69,7 +70,7 @@
 
 /* Product Image */
 .product-img-container {
-  height: 160px;
+  height: 140px;
   background: #f8f9fa;
   display: flex;
   align-items: center;

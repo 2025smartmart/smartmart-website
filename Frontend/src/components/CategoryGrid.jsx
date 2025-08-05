@@ -15,7 +15,7 @@ const categories = [
   { name: 'Watches', image: watchImg, link: '/category/watches', bgColor: 'rgba(231, 76, 60, 0.1)' },
   { name: 'Laptops', image: laptopImg, link: '/category/laptops', bgColor: 'rgba(155, 89, 182, 0.1)' },
   { name: 'Airbuds', image: airbudsImg, link: '/category/airbuds', bgColor: 'rgba(26, 188, 156, 0.1)' },
-  { name: 'Headsets', image: headsetImg, link: '/category/headsets', bgColor: 'rgba(241, 196, 15, 0.1)' },
+  { name: 'Earphones', image: headsetImg, link: '/category/headsets', bgColor: 'rgba(241, 196, 15, 0.1)' },
   { name: 'Speakers', image: speakerImg, link: '/category/speakers', bgColor: 'rgba(46, 204, 113, 0.1)' },
 ];
 
@@ -25,7 +25,7 @@ const CategoryGrid = () => {
       <div className="container">
         <div className="section-header text-center mb-5">
           <h2 className="text-center fw-semibold mb-5 text-dark">Shop By Category</h2>
-          <p className="section-subtitle text-muted">Discover our populer collections</p>
+          <p className="section-subtitle text-muted">Discover our populer Categories</p>
         </div>
 
         <div className="row g-4">

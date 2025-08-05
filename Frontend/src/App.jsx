@@ -19,6 +19,9 @@ import UserRoute from "./routes/UserRoute";
 import Profile from "./pages/Profile";
 import Orders from "./pages/Orders";
 import Dashboard from "./pages/Dashboard";
+import CartPage from "./pages/CartPage";
+import Checkout from "./pages/Checkout";
+import OrderSuccess from "./pages/OrderSuccess";
 
 
 const AppContent = () => {
@@ -46,6 +49,9 @@ const AppContent = () => {
         <Route path="/profile" element={<UserRoute><Profile /></UserRoute>} />
         <Route path="/orders" element={<UserRoute><Orders /></UserRoute>} />
         <Route path="/dashboard" element={<Dashboard />} />
+        <Route path="/cart" element={<CartPage />} />
+        <Route path="/checkout" element={<Checkout />} />
+        <Route path="/order-success" element={<OrderSuccess />} />
     
       </Routes>
 

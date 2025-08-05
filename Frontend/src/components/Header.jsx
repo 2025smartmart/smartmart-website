@@ -1,12 +1,14 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
+import { useCart } from '../context/CartContext';
 import logo from '../assets/logo.png';
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
 const Header = () => {
   const { user, logout } = useAuth();
+  const { cartItems } = useCart();
   const navigate = useNavigate();
 
   const handleLogout = () => {
@@ -39,47 +41,41 @@ const Header = () => {
           </div>
         </form>
 
-        {/* Navbar toggler (for mobile) */}
+        {/* Navbar toggler */}
         <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarContent">
           <span className="navbar-toggler-icon"></span>
         </button>
 
-        {/* Navbar Content */}
         <div className="collapse navbar-collapse" id="navbarContent">
           <div className="d-flex flex-wrap align-items-center justify-content-end w-100 gap-4 mt-3 mt-lg-0">
-
-            {/* Nav Links */}
             <ul className="navbar-nav flex-row gap-5 mr-5">
               <li className="nav-item"><Link className="nav-link text-light fw-semibold" to="/">Home</Link></li>
               <li className="nav-item"><Link className="nav-link text-light fw-semibold" to="/shop">Shop</Link></li>
               <li className="nav-item"><Link className="nav-link text-light fw-semibold" to="/about">About</Link></li>
               <li className="nav-item"><Link className="nav-link text-light fw-semibold" to="/contact">Contact</Link></li>
-
-          {user && user.role === 'admin' && (
-          <li className="nav-item">
-          <Link className="nav-link text-light fw-semibold" to="/dashboard">
-            Dashboard
-          </Link>
-          </li>
-          )}
-
+              {user && user.role === 'admin' && (
+                <li className="nav-item"><Link className="nav-link text-light fw-semibold" to="/dashboard">Dashboard</Link></li>
+              )}
             </ul>
 
-            {/* Auth Section */}
+            {/* CART ICON */}
+            <Link to="/cart" className="text-light position-relative">
+              <i className="bi bi-cart3 fs-5"></i>
+              {cartItems.length > 0 && (
+                <span className="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
+                  {cartItems.length}
+                </span>
+              )}
+            </Link>
+
+
+
+            {/* AUTH SECTION */}
             {!user ? (
-              // BEFORE LOGIN
               <>
                 <i className="bi bi-person-circle fs-5 text-light" data-bs-toggle="tooltip" title="Account"></i>
                 <div className="dropdown">
-                  <button
-                    className="btn btn-outline-light btn-sm dropdown-toggle"
-                    type="button"
-                    id="loginDropdown"
-                    data-bs-toggle="dropdown"
-                    aria-expanded="false"
-                  >
-                    Login
-                  </button>
+                  <button className="btn btn-outline-light btn-sm dropdown-toggle" type="button" id="loginDropdown" data-bs-toggle="dropdown" aria-expanded="false">Login</button>
                   <ul className="dropdown-menu dropdown-menu-end" aria-labelledby="loginDropdown">
                     <li className="dropdown-item small d-flex justify-content-between">
                       <span>New user?</span>
@@ -92,16 +88,11 @@ const Header = () => {
                 </div>
               </>
             ) : (
-              // AFTER LOGIN
               <>
-                
-                
-              <Link to={user.role === 'admin' ? '/dashboard' : '/profile'} className="d-flex align-items-center text-light gap-2">
-              <i className="bi bi-person-circle fs-5" />
-              <span>{user.name?.split(' ')[0]}</span>
-              </Link>
-
-
+                <Link to={user.role === 'admin' ? '/dashboard' : '/profile'} className="d-flex align-items-center text-light gap-2">
+                  <i className="bi bi-person-circle fs-5" />
+                  <span>{user.name?.split(' ')[0]}</span>
+                </Link>
                 <button onClick={handleLogout} className="btn btn-outline-light btn-sm" data-bs-toggle="tooltip" title="Logout">
                   <i className="bi bi-box-arrow-right"></i>
                 </button>

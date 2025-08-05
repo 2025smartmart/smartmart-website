@@ -18,10 +18,12 @@ app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
 // Routes
 const router = require('./routes/router'); 
 const productRoutes = require('./routes/productRoutes');
+const orderRoutes = require('./routes/orderRoutes')
 
 app.use("/api", router); 
 app.use("/api/products", productRoutes);
-app.use("/api/category", productRoutes)
+app.use("/api/category", productRoutes);
+app.use('/api/orders', orderRoutes);
 
 // MongoDB connection
 mongoose.connect(process.env.MONGO_URI, {

@@ -1,89 +1,84 @@
-// client/src/components/ShopFilters.jsx
 import React from 'react';
-import { Form } from 'react-bootstrap';
+
+const categories = ['Mobiles', 'Watches', 'Laptops', 'Airbuds', 'Earphones', 'Speaker', 'TV'];
 
 const ShopFilters = ({ filters, setFilters }) => {
-  const categories = ['Mobiles', 'Watches', 'Laptops', 'Airbuds', 'Headsets', 'Speakers'];
-  const brands = ['Noise', 'Boat', 'Fire-Boltt', 'Samsung', 'Nothing', 'Realme', 'Oneplus'];
-  
-  const handlePriceChange = (e, index) => {
-    const newPriceRange = [...filters.priceRange];
-    newPriceRange[index] = parseInt(e.target.value);
-    setFilters({ ...filters, priceRange: newPriceRange });
+  const handleCategoryChange = (category) => {
+    setFilters((prev) => ({ ...prev, category }));
+  };
+
+  const handlePriceChange = (e) => {
+    const value = parseInt(e.target.value);
+    setFilters((prev) => ({
+      ...prev,
+      priceRange: [100, value]
+    }));
+  };
+
+  const handleClearFilters = () => {
+    setFilters({
+      category: '',
+      priceRange: [100, 80000],
+      brand: '',
+      rating: 0
+    });
   };
 
   return (
-    <div className="shop-filters">
-      <h5 className="filter-title">Filters</h5>
-      
-      <div className="filter-section">
-        <h6>CATEGORIES</h6>
-        <Form>
-          {categories.map(category => (
-            <Form.Check 
-              key={category}
+    <div>
+      <div className="d-flex justify-content-between align-items-center mb-3">
+        <h5 className="mb-0">Filters</h5>
+        <button className="btn btn-sm btn-outline-danger" onClick={handleClearFilters}>
+          Clear
+        </button>
+      </div>
+
+      {/* Category Filter */}
+      <div className="mb-4">
+        <h6>Category</h6>
+        {categories.map((cat) => (
+          <div className="form-check" key={cat}>
+            <input
+              className="form-check-input"
               type="radio"
-              label={category}
               name="category"
-              id={`category-${category}`}
-              checked={filters.category === category}
-              onChange={() => setFilters({ ...filters, category })}
+              id={`cat-${cat}`}
+              checked={filters.category === cat}
+              onChange={() => handleCategoryChange(cat)}
             />
-          ))}
-        </Form>
+            <label className="form-check-label" htmlFor={`cat-${cat}`}>
+              {cat}
+            </label>
+          </div>
+        ))}
       </div>
-      
-      <div className="filter-section">
-        <h6>PRICE</h6>
-        <div className="price-range">
-          <input 
-            type="range" 
-            min="500" 
-            max="20000" 
-            value={filters.priceRange[0]} 
-            onChange={(e) => handlePriceChange(e, 0)}
-          />
-          
-          <div className="price-values">
-             ₹{filters.priceRange[0].toLocaleString('en-IN')} - ₹{filters.priceRange[1].toLocaleString('en-IN')}
-        </div>
-    </div>
-</div>
-      
-      <div className="filter-section">
-        <h6>BRAND</h6>
-        <Form>
-          {brands.map(brand => (
-            <Form.Check 
-              key={brand}
-              type="checkbox"
-              label={brand}
-              id={`brand-${brand}`}
-              checked={filters.brand === brand}
-              onChange={() => setFilters({ ...filters, brand })}
-            />
-          ))}
-        </Form>
-      </div>
-      
-      <div className="filter-section">
-        <h6>CUSTOMER RATINGS</h6>
-        <Form>
-          {[4, 3, 2, 1].map(rating => (
-            <Form.Check 
-              key={rating}
-              type="radio"
-              label={`${rating} ★ & above`}
-              name="rating"
-              id={`rating-${rating}`}
-              checked={filters.rating === rating}
-              onChange={() => setFilters({ ...filters, rating })}
-            />
-          ))}
-        </Form>
-      </div>
-    </div>
+
+      {/* Price Range Slider */}
+      <div className="mb-4">
+  <h6>Price</h6>
+  <div style={{ width: '80%' }}>
+    <input
+      type="range"
+      className="form-range"
+      min="100"
+      max="80000"
+      value={filters.priceRange[1]}
+      onChange={(e) =>
+        setFilters((prev) => ({
+          ...prev,
+          priceRange: [prev.priceRange[0], Number(e.target.value)],
+        }))
+      }
+    />
+  </div>
+  <div className="text-muted small mt-1">
+    ₹{filters.priceRange[0].toLocaleString()} - ₹{filters.priceRange[1].toLocaleString()}
+  </div>
+  </div>
+  </div>
+
   );
 };
 
 export default ShopFilters;
+

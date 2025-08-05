@@ -22,6 +22,9 @@ import Dashboard from "./pages/Dashboard";
 import CartPage from "./pages/CartPage";
 import Checkout from "./pages/Checkout";
 import OrderSuccess from "./pages/OrderSuccess";
+import ProductPage from "./pages/ProductPage";
+import SearchResults from "./pages/SearchResults";
+
 
 
 const AppContent = () => {
@@ -52,6 +55,8 @@ const AppContent = () => {
         <Route path="/cart" element={<CartPage />} />
         <Route path="/checkout" element={<Checkout />} />
         <Route path="/order-success" element={<OrderSuccess />} />
+        <Route path="/product/:id" element={<ProductPage />} />
+        <Route path="/search" element={<SearchResults />} />
     
       </Routes>
 

@@ -2,7 +2,8 @@ import React from 'react';
 import { Card, Button, Badge, OverlayTrigger, Tooltip } from 'react-bootstrap';
 import { FaCartPlus, FaHeart, FaEye } from 'react-icons/fa';
 import { Link } from 'react-router-dom';
-import { useCart } from '../context/CartContext'; // Ensure CartContext is correctly implemented
+import { useCart } from '../context/CartContext';
+ // Ensure CartContext is correctly implemented
 
 const ProductCard = ({ product, isInWishlist, onWishlistToggle }) => {
   const { addToCart } = useCart(); // Access addToCart function from context
@@ -15,7 +16,8 @@ const ProductCard = ({ product, isInWishlist, onWishlistToggle }) => {
             variant="top"
             src={product.image ? `http://localhost:5000${product.image}` : 'https://via.placeholder.com/300x300?text=No+Image'}
             alt={product.name}
-            className="product-img p-3"
+            className="product-img p-3 form"
+             
             onError={(e) => {
               e.target.src = 'https://via.placeholder.com/300x300?text=Image+Error';
               e.target.onerror = null;
@@ -46,9 +48,9 @@ const ProductCard = ({ product, isInWishlist, onWishlistToggle }) => {
 
       <Card.Body className="d-flex flex-column p-3">
         {/* Category Badge */}
-        <Badge bg="light" text="dark" className="mb-2 align-self-start">
-          {product.category}
-        </Badge>
+       <Badge bg="light" text="dark" className="mb-2 align-self-start">
+  {product.category?.name }
+</Badge>
 
         {/* Product Name */}
         <Card.Title className="mb-2 fs-6">

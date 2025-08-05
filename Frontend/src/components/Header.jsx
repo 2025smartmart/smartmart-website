@@ -5,6 +5,7 @@ import { useCart } from '../context/CartContext';
 import logo from '../assets/logo.png';
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import SearchBox from './SearchBox';
 
 const Header = () => {
   const { user, logout } = useAuth();
@@ -27,19 +28,8 @@ const Header = () => {
         </Link>
 
         {/* Search Box */}
-        <form className="d-none d-md-block" style={{ maxWidth: '280px', width: '100%' }}>
-          <div className="input-group">
-            <input
-              type="text"
-              className="form-control border-danger"
-              placeholder="Search..."
-              style={{ borderRadius: '30px 0 0 30px' }}
-            />
-            <button className="btn btn-danger" type="submit" style={{ borderRadius: '0 30px 30px 0' }}>
-              <i className="bi bi-search"></i>
-            </button>
-          </div>
-        </form>
+        <SearchBox/>
+        
 
         {/* Navbar toggler */}
         <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarContent">

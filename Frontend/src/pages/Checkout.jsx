@@ -1,186 +1,189 @@
-import React, { useState } from 'react';
-import { Container, Row, Col, Form, Button, Card } from 'react-bootstrap';
-import { useCart } from '../context/CartContext';
-import { useNavigate } from 'react-router-dom';
-import { toast } from 'react-toastify';
-import { placeOrder } from '../api/orderAPI'; // ✅ important
+import React, { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
+import './Checkout.css'; // Optional: for extra custom styling if needed
 
 const Checkout = () => {
-  const { cartItems, updateQuantity, removeFromCart } = useCart();
   const navigate = useNavigate();
-
   const [formData, setFormData] = useState({
-    name: '',
-    email: '',
-    phone: '',
-    address: '',
-    city: '',
-    zip: '',
-    country: ''
+    name: "",
+    email: "",
+    phone: "",
+    address: "",
+    city: "",
+    state: "",
+    zip: "",
   });
 
-  const totalAmount = cartItems.reduce((sum, item) => {
-    const priceAfterDiscount = item.discount > 0
-      ? item.price * (1 - item.discount / 100)
-      : item.price;
+  const cartItems = JSON.parse(localStorage.getItem("cartItems")) || [];
+  const checkoutProduct = JSON.parse(localStorage.getItem("checkoutProduct"));
+  const itemsToCheckout = checkoutProduct
+    ? [{ ...checkoutProduct, quantity: 1 }]
+    : cartItems;
+
+  const totalAmount = itemsToCheckout.reduce((sum, item) => {
+    const priceAfterDiscount =
+      item.discount > 0 ? item.price * (1 - item.discount / 100) : item.price;
     return sum + priceAfterDiscount * item.quantity;
   }, 0);
 
-  const handleChange = (e) => {
-    setFormData({ ...formData, [e.target.name]: e.target.value });
+  const handleInputChange = (e) => {
+    const { name, value } = e.target;
+    setFormData((prev) => ({ ...prev, [name]: value }));
   };
 
-  const handlePlaceOrder = async () => {
-    // Validate
-    const missingFields = Object.values(formData).some(field => field.trim() === '');
-    if (missingFields) {
-      toast.error('Please fill all billing fields!');
+  const handlePlaceOrder = () => {
+    if (
+      !formData.name ||
+      !formData.email ||
+      !formData.phone ||
+      !formData.address ||
+      !formData.city ||
+      !formData.state ||
+      !formData.zip
+    ) {
+      alert("Please fill in all shipping details.");
       return;
     }
 
     const orderData = {
-  cartItems,
-  shippingInfo: formData, // ✅ correctly passed
-  totalAmount
-};
+      cartItems: itemsToCheckout,
+      shippingInfo: formData,
+      totalAmount,
+    };
 
-try {
-  const res = await placeOrder(orderData);
-  toast.success(res.message || 'Order placed!');
+    console.log("Order Placed:", orderData);
 
-  // Clear cart after success
-  localStorage.removeItem('cartItems');
+    localStorage.removeItem("cartItems");
+    localStorage.removeItem("checkoutProduct");
 
-  // ✅ Pass order data to success page via state
-  navigate('/order-success', {
-    state: {
-      orderId: res.orderId,
-      order: res.order
-    }
-  });
-
-} catch (err) {
-  toast.error(err?.response?.data?.message || 'Order failed!');
-}
-}
+    alert("Order placed successfully!");
+    navigate("/order-success");
+  };
 
   return (
-    <Container className="py-5">
-      <h2 className="mb-4">Checkout</h2>
-      <Row>
-        {/* Billing Form */}
-        <Col md={7}>
-          <Card className="p-4 shadow-sm border-0">
-            <h5 className="mb-3">Billing Information</h5>
-            <Form>
-              <Form.Group className="mb-3">
-                <Form.Label>Full Name</Form.Label>
-                <Form.Control
+    <div className="container py-5">
+      <h2 className="mb-4 text-center">Checkout</h2>
+      <div className="row g-4">
+        {/* Shipping Details */}
+        <div className="col-md-6">
+          <div className="card shadow-sm p-4">
+            <h4 className="mb-3">Shipping Information</h4>
+            <form>
+              <input
+                type="text"
+                className="form-control mb-3"
+                placeholder="Full Name"
+                name="name"
+                value={formData.name}
+                onChange={handleInputChange}
+              />
+              <input
+                type="email"
+                className="form-control mb-3"
+                placeholder="Email Address"
+                name="email"
+                value={formData.email}
+                onChange={handleInputChange}
+              />
+              <input
+                type="tel"
+                className="form-control mb-3"
+                placeholder="Phone Number"
+                name="phone"
+                value={formData.phone}
+                onChange={handleInputChange}
+              />
+              <input
+                type="text"
+                className="form-control mb-3"
+                placeholder="Street Address"
+                name="address"
+                value={formData.address}
+                onChange={handleInputChange}
+              />
+              <div className="d-flex gap-2 mb-3">
+                <input
                   type="text"
-                  name="name"
-                  value={formData.name}
-                  onChange={handleChange}
-                  placeholder="Enter your full name"
+                  className="form-control"
+                  placeholder="City"
+                  name="city"
+                  value={formData.city}
+                  onChange={handleInputChange}
                 />
-              </Form.Group>
-              <Form.Group className="mb-3">
-                <Form.Label>Email</Form.Label>
-                <Form.Control
-                  type="email"
-                  name="email"
-                  value={formData.email}
-                  onChange={handleChange}
-                  placeholder="Enter your email"
-                />
-              </Form.Group>
-              <Form.Group className="mb-3">
-                <Form.Label>Phone</Form.Label>
-                <Form.Control
+                <input
                   type="text"
-                  name="phone"
-                  value={formData.phone}
-                  onChange={handleChange}
-                  placeholder="Enter your phone number"
+                  className="form-control"
+                  placeholder="State"
+                  name="state"
+                  value={formData.state}
+                  onChange={handleInputChange}
                 />
-              </Form.Group>
-              <Form.Group className="mb-3">
-                <Form.Label>Address</Form.Label>
-                <Form.Control
+                <input
                   type="text"
-                  name="address"
-                  value={formData.address}
-                  onChange={handleChange}
-                  placeholder="Street address"
+                  className="form-control"
+                  placeholder="ZIP"
+                  name="zip"
+                  value={formData.zip}
+                  onChange={handleInputChange}
                 />
-              </Form.Group>
-              <Row>
-                <Col>
-                  <Form.Group className="mb-3">
-                    <Form.Label>City</Form.Label>
-                    <Form.Control
-                      type="text"
-                      name="city"
-                      value={formData.city}
-                      onChange={handleChange}
-                    />
-                  </Form.Group>
-                </Col>
-                <Col>
-                  <Form.Group className="mb-3">
-                    <Form.Label>Zip</Form.Label>
-                    <Form.Control
-                      type="text"
-                      name="zip"
-                      value={formData.zip}
-                      onChange={handleChange}
-                    />
-                  </Form.Group>
-                </Col>
-              </Row>
-              <Form.Group className="mb-3">
-                <Form.Label>Country</Form.Label>
-                <Form.Control
-                  type="text"
-                  name="country"
-                  value={formData.country}
-                  onChange={handleChange}
-                />
-              </Form.Group>
-            </Form>
-          </Card>
-        </Col>
+              </div>
+            </form>
+          </div>
+        </div>
 
         {/* Order Summary */}
-        <Col md={5}>
-          <Card className="p-4 shadow-sm border-0">
-            <h5 className="mb-3">Order Summary</h5>
-            {cartItems.map(item => (
-              <div key={item._id} className="d-flex justify-content-between mb-3 border-bottom pb-2">
-                <div>
-                  <strong>{item.name}</strong> × {item.quantity}
-                  <br />
-                  <small>{item.category}</small>
-                </div>
-                <div>
-                  ₹{((item.price * (1 - (item.discount || 0) / 100)) * item.quantity).toFixed(2)}
-                </div>
-              </div>
-            ))}
-
-            <div className="d-flex justify-content-between mt-3 fw-bold">
-              <span>Total:</span>
+        <div className="col-md-6">
+          <div className="card shadow-sm p-4">
+            <h4 className="mb-3">Order Summary</h4>
+            <ul className="list-group mb-3">
+              {itemsToCheckout.map((item, index) => {
+                const priceAfterDiscount =
+                  item.discount > 0
+                    ? item.price * (1 - item.discount / 100)
+                    : item.price;
+                return (
+                  <li
+                    key={index}
+                    className="list-group-item d-flex justify-content-between align-items-center"
+                  >
+                    <div className="d-flex align-items-center gap-3">
+                      <img
+                        src={`http://localhost:5000${item.image}`}
+                        alt={item.name}
+                        width={60}
+                        height={60}
+                        style={{ objectFit: "cover", borderRadius: "8px" }}
+                        onError={(e) => {
+                          e.target.src =
+                            "https://via.placeholder.com/60x60?text=No+Image";
+                        }}
+                      />
+                      <div>
+                        <strong>{item.name}</strong>
+                        <br />
+                        Qty: {item.quantity}
+                      </div>
+                    </div>
+                    <span>₹{(priceAfterDiscount * item.quantity).toFixed(2)}</span>
+                  </li>
+                );
+              })}
+            </ul>
+            <div className="d-flex justify-content-between fs-5 fw-bold mb-3">
+              <span>Total Amount:</span>
               <span>₹{totalAmount.toFixed(2)}</span>
             </div>
-
-            <Button className="w-100 mt-4" variant="success" onClick={handlePlaceOrder}>
+            <button className="btn btn-success w-100" onClick={handlePlaceOrder}>
               Place Order
-            </Button>
-          </Card>
-        </Col>
-      </Row>
-    </Container>
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
   );
 };
 
 export default Checkout;
+
+
 

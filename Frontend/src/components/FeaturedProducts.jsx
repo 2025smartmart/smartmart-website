@@ -3,11 +3,14 @@ import axios from 'axios';
 import { Spinner, Button, Badge, OverlayTrigger, Tooltip } from 'react-bootstrap';
 import { FaCartPlus, FaHeart, FaEye, FaStar } from 'react-icons/fa';
 import './FeaturedProducts.css';
+import ProductCard from './Productcard';
+import { useCart } from '../context/CartContext';
 
 const FeaturedProducts = () => {
   const [products, setProducts] = useState([]);
   const [loading, setLoading] = useState(true);
   const [wishlist, setWishlist] = useState([]);
+  const { addToCart } = useCart();
 
   const toggleWishlist = (productId) => {
     setWishlist(prev => 
@@ -121,6 +124,7 @@ const FeaturedProducts = () => {
                         <Button 
                           variant="primary" 
                           className="add-to-cart-btn w-100"
+                          onClick={() => addToCart(product)}
                         >
                           <FaCartPlus className="me-2" />
                           Add to Cart

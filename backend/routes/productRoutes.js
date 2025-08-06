@@ -9,21 +9,12 @@ const {
   getFeaturedProducts,
   addProduct,
   addCategory,
-  getAllCategories
+  getAllCategories,
+  searchProducts
 } = require('../controllers/product/productController');
 
-// ✅ Search must come before /:id
-router.get('/search', async (req, res) => {
-  try {
-    const keyword = req.query.q;
-    const products = await Product.find({
-      name: { $regex: keyword, $options: "i" }
-    });
-    res.json(products);
-  } catch (error) {
-    res.status(500).json({ message: "Search failed", error });
-  }
-});
+
+
 
 // ✅ Add product
 router.post('/add-product', upload.single('image'), addProduct);
@@ -37,6 +28,9 @@ router.get('/', getAllProducts);
 
 // ✅ Get featured products
 router.get('/featured', getFeaturedProducts);
+
+// ✅ Search must come before /:id
+router.get("/search", searchProducts);
 
 // ✅ Get single product by ID
 router.get('/:id', async (req, res) => {

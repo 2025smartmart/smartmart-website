@@ -85,13 +85,42 @@ const getAllCategories = async (req, res) => {
   }
 };
 
+const searchProducts = async (req, res) => {
+  try {
+    const keyword = req.query.q?.trim();
+    if (!keyword) return res.json([]);
+
+    const regex = new RegExp(keyword, 'i'); // case-insensitive regex
+
+    // 1. Find matching categories by name
+    
+    const matchingCategories = await Category.find({ name: { $regex: regex } });
+    const matchingCategoryIds = matchingCategories.map((cat) => cat._id);
+
+    // 2. Find products that match name or category id
+    const products = await Product.find({
+      $or: [
+        { name: { $regex: regex } },
+        { category: { $in: matchingCategoryIds } }
+      ]
+    }).populate("category");
+
+    res.json(products);
+  } catch (error) {
+    console.error("Search error:", error);
+    res.status(500).json({ message: "Internal Server Error" });
+  }
+};
+
+
 
 module.exports = {
   getAllProducts,
   getFeaturedProducts,
   addProduct,
   addCategory,
-  getAllCategories
+  getAllCategories,
+  searchProducts
 };
 
 

@@ -24,6 +24,7 @@ import Checkout from "./pages/Checkout";
 import OrderSuccess from "./pages/OrderSuccess";
 import ProductPage from "./pages/ProductPage";
 import SearchResults from "./pages/SearchResults";
+import './App.css'
 
 
 

@@ -1,5 +1,39 @@
-.card:hover {
-  transform: scale(1.02);
-  transition: all 0.3s ease;
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+/* SearchResults.css */
+
+.product-image {
+  max-height: 200px;
+  width: auto;
+  object-fit: contain;
+  margin: 0 auto;
+  padding: 10px;
+  display: block;
 }
+
+.card {
+  transition: transform 0.2s ease;
+}
+
+.card:hover {
+  transform: translateY(-5px);
+}
+
+.card-body {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.card-title {
+  font-size: 1rem;
+  font-weight: 600;
+  margin-bottom: 0.5rem;
+}
+
+.card-text {
+  font-size: 0.95rem;
+}
+
+.btn {
+  font-size: 0.85rem;
+}
+

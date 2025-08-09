@@ -56,7 +56,7 @@ const FeaturedProducts = () => {
     <section className="featured-products-section">
       <div className="container py-5">
         <div className="section-intro text-center mb-5">
-          <h6 className="section-pretitle text-uppercase text-muted mb-3">Top Collection</h6>
+          <h6 className="section-pretitle text-uppercase text-muted mb-3">Top Collections</h6>
           <h2 className="text-center fw-semibold mb-5 text-dark">OUR PRODUCTS</h2>
           <div className="divider mx-auto"></div>
         </div>
@@ -64,7 +64,7 @@ const FeaturedProducts = () => {
         {loading ? (
           <div className="text-center py-5">
             <Spinner animation="border" variant="primary" className="spinner-grow-lg" />
-            <p className="mt-3 text-muted">Curating our finest selection...</p>
+            <p className="mt-3 text-muted">Curating our finest selections...</p>
           </div>
         ) : (
           <div className="row g-4">

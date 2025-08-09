@@ -1,6 +1,6 @@
 import React from "react";
 import { Container, Row, Col, Button } from "react-bootstrap";
-import banner from '../assets/mainbanner.png'
+import banner from '../assets/gadgets.jpg'
 
 const AboutUs = () => {
   return (
@@ -11,10 +11,12 @@ const AboutUs = () => {
           <Col md={6}>
             <div className="mb-3">
               <img
-                src="{banner}" 
-                alt="banner"
-                className="img-fluid rounded shadow-sm"
-              />
+  src={banner} // ✅ No quotes
+  alt="gadgets"
+  className="img-fluid rounded shadow-sm"
+  style={{ maxWidth: "100%", height: "auto" }}
+/>
+
             </div>
           </Col>
 

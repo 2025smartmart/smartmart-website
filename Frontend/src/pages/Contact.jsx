@@ -2,17 +2,8 @@ import React from 'react';
 
 const Contact = () => {
   return (
-    <div
-      style={{
-        backgroundImage: 'url("https://webneel.com/wallpaper/sites/default/files/images/01-2018/5-beautiful-hd-flower-wallpaper.jpg")',
-        backgroundSize: 'cover',
-        backgroundRepeat: 'no-repeat',
-        backgroundPosition: 'center',
-        minHeight: '100vh',
-        padding: '40px 0',
-      }}
-    >
-      <div className="container">
+    <div style={{ backgroundColor: '#fffdfdff', minHeight: '100vh' }}> 
+      <div className="container py-5">
         <h2 className="text-center text-danger mb-5">CONTACT US</h2>
 
         <div className="row justify-content-center">

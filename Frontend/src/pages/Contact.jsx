@@ -38,7 +38,7 @@ const Contact = () => {
                   <textarea className="form-control" id="message" rows="4" placeholder="Write your message here..." required></textarea>
                 </div>
 
-                <button type="submit" className="btn btn-danger w-100">Send</button>
+                <button type="submit" className="btn btn-danger w-100">Send your massage</button>
               </form>
             </div>
           </div>

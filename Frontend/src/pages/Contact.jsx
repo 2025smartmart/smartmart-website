@@ -1,6 +1,9 @@
 import React from 'react';
 
+
+
 const Contact = () => {
+
   return (
     <div style={{ backgroundColor: '#fffdfdff', minHeight: '100vh' }}> 
       <div className="container py-5">
